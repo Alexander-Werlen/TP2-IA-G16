@@ -1,0 +1,51 @@
+[project]
+name = "tutoria-backend"
+version = "0.1.0"
+description = "TutorIA backend - FastAPI + LangGraph agent for academic tutoring"
+requires-python = ">=3.11,<3.13"
+dependencies = [
+    "fastapi>=0.115.0",
+    "uvicorn[standard]>=0.32.0",
+    "pydantic>=2.9.0",
+    "pydantic-settings>=2.6.0",
+    "sqlalchemy>=2.0.36",
+    "alembic>=1.14.0",
+    "python-multipart>=0.0.20",
+    "bcrypt>=4.2.0",
+    "pyjwt>=2.9.0",
+    "email-validator>=2.2.0",
+    "google-genai>=1.0.0,<2.0.0",
+    "openai>=1.68.0",
+    "pypdf>=4.3.0",
+    "python-docx>=1.1.2",
+    "chromadb>=0.5.20",
+    "langgraph>=0.2.0,<1.0.0",
+]
+
+[project.optional-dependencies]
+dev = [
+    "pytest>=8.3.0",
+    "pytest-asyncio>=0.24.0",
+    "httpx>=0.28.0",
+    "ruff>=0.7.0",
+]
+
+[tool.pytest.ini_options]
+asyncio_mode = "auto"
+
+[build-system]
+requires = ["setuptools>=68", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[tool.setuptools.packages.find]
+include = ["app*"]
+
+[tool.ruff]
+line-length = 100
+target-version = "py311"
+
+[tool.ruff.lint]
+select = ["E", "F", "I", "B", "UP"]
+# B008: `Depends(...)` en defaults es el patrón idiomático de FastAPI.
+# Lo ignoramos a nivel proyecto para no llenar de noqa cada ruta.
+ignore = ["E501", "B008"]
